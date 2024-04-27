@@ -5,7 +5,7 @@ import wikipedia as wp
 def getWikiSearchSuggestions(query):
     try:
         page = wp.search(query,results = 5)
-        suggestions = [str(p.title) for p in page]
+        suggestions = [p for p in page]
         return suggestions
     except:
         return ["Nothing Found"]
@@ -25,9 +25,11 @@ def main():
     suggestions = getWikiSearchSuggestions(text_search)
 
     if suggestions:
-        selected_suggestion = st.selectbox("Select",options = suggestions)
-
-    st.header(text_search)
+        st.write("Suggestions:")
+        for suggestion in suggestions:
+            st.write(suggestion)
+    else:
+        st.write("No suggestions available.")
     
 
 if __name__ == "__main__":
